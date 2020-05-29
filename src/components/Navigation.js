@@ -10,7 +10,7 @@ export class Navigation extends React.Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav>
                     <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
-                    <NavLink className="d-inline p-2 bg-primary text-white" to="/">Home</NavLink>
+                    <NavLink className="d-inline p-2 bg-primary text-white" to="/home">Home</NavLink>
                     <NavLink className="d-inline p-2 bg-primary text-white" to="/about">About Us</NavLink>
                     <NavLink className="d-inline p-2 bg-primary text-white" to="/contactus">Contact Us</NavLink>
                 </Nav>

@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {Carousel} from 'react-bootstrap';
 
 import { BASE_URL } from '../environment'
+import fire from './firebase/firebase';
 
 // console.log(BASE_URL);
 
@@ -13,8 +14,13 @@ export class Home extends React.Component {
 
 		this.state = {
 			index: 0
-		};
-	}
+        };       
+        console.log(BASE_URL);
+    }
+    
+    logout () {
+        fire.auth().logout();
+    }
 
 	handleSelect(selectedIndex, e) {
 		this.setState({
