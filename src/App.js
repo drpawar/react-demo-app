@@ -12,17 +12,13 @@ class App extends React.Component {
     return (
       <BrowserRouter>
       <Navigation></Navigation>
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/contactus">
-            <ContactUs />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        <div style={{padding: '10px'}}>
+          <Switch>
+            <Route path="/about" component={About}/>
+            <Route path="/contactus" component={ContactUs}/>
+            <Route path="/" component={Home}/>
+          </Switch>
+        </div>
       </BrowserRouter>
       
     );
