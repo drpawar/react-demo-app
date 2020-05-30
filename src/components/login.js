@@ -20,22 +20,35 @@ export class Login extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
     };
 
-    login (e) {
-        fire.auth().signInWithEmailAndPassword(this.state.email , this.state.password).then((res) => {
+    login (evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        let formEvt = evt.target;
+        fire
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(res => {
             console.log("user at firebase", res);
-            if(res.message) {
-                this.state.msg = res.message;
-            }
-        }).catch((e)=>{
-            console.log("error",e)
+            this.setState({ msg: "Login Successful!" });
         })
+        .catch(e => {
+            console.log("error", e);
+            formEvt.reset();
+            this.setState({
+            msg: e.message,
+            email: "",
+            password: ""
+            });
+        });
     }
 
     render() {
         return (
             <div>
                 <header style={{padding: '10px', backgroundColor: '#007bff', color: '#fff'}}>Login</header>
-                <Form>
+                <Form onSubmit={e => {
+                        this.login(e);
+                    }}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" name="email" placeholder="Enter email" onChange={this.handleChange}/>
@@ -45,7 +58,7 @@ export class Login extends React.Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
                     </Form.Group>
-                    <Button variant="primary" type="button" onClick={(e)=> {this.login(e)}}>
+                    <Button variant="primary" type="submit" disabled={this.state.email === "" || this.state.password === ""}>
                         Submit
                     </Button>
                     {this.state.msg ? (<Alert variant="success">
